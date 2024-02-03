@@ -110,27 +110,38 @@ public class VoiceActivityDetector implements AutoCloseable {
      * Available sample rates.
      */
     public enum SampleRate {
-        /** 8000 samples per seconds */
+        /**
+         * 8000 samples per seconds
+         */
         S8000(8000),
-        /** 8000 samples per seconds */
-         S16000(16000),
-        /** 8000 samples per seconds */
-         S32000(32000),
-        /** 8000 samples per seconds */
-         S48000(48000);
+        /**
+         * 8000 samples per seconds
+         */
+        S16000(16000),
+        /**
+         * 8000 samples per seconds
+         */
+        S32000(32000),
+        /**
+         * 8000 samples per seconds
+         */
+        S48000(48000);
 
         SampleRate(final int value) {
             this.value = value;
         }
+
         private final int value;
 
         /**
          * Get value.
+         *
          * @return sample rate int value.
          */
         public int toValue() {
             return value;
         }
+
         /**
          * Initialize from number. Only 8000, 16000, 32000, 48000 are allowed.
          *
@@ -139,13 +150,21 @@ public class VoiceActivityDetector implements AutoCloseable {
          * @throws IllegalArgumentException unsupported value.
          */
         public static SampleRate fromValue(int value) throws IllegalArgumentException {
-            return switch (value) {
-                case 8000 -> S8000;
-                case 16000 -> S16000;
-                case 32000 -> S32000;
-                case 48000 -> S48000;
-                default -> throw new IllegalArgumentException("Unsupported sample rate.");
-            };
+
+            switch (value) {
+                case 8000:
+                    return S8000;
+                case 16000:
+                    return S16000;
+                case 32000:
+                    return S32000;
+                case 48000:
+                    return S48000;
+                default:
+                    throw new IllegalArgumentException("Unsupported sample rate.");
+
+            }
+
         }
     }
 
@@ -174,6 +193,7 @@ public class VoiceActivityDetector implements AutoCloseable {
 
     /**
      * Initializes a {@link VoiceActivityDetector} instance.
+     *
      * @return a new {@link VoiceActivityDetector}.
      * @throws IOException native library unavailable.
      */
@@ -219,11 +239,13 @@ public class VoiceActivityDetector implements AutoCloseable {
         NativeUtils.loadLibraryFromJar(bundleLibraryPath);
         libraryLoaded = true;
     }
+
     private static void assertRegistered() throws IOException {
         if (!libraryLoaded) {
             throw new IOException("Native library is unavailable.");
         }
     }
+
     private void assertOpen() throws IOException {
         if (closed) {
             throw new IOException("VAD is closed.");
