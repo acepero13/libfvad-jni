@@ -8,7 +8,7 @@
     <artifactId>libfvad-jni</artifactId>
     <name>libfvad-jni</name>
     <url>https://github.com/GiviMAD/libfvad-jni</url>
-    <version>1.0.0-0</version>
+    <version>1.1.1</version>
     <description>A JNI wrapper for using libfvad</description>
     <licenses>
         <license>
@@ -45,15 +45,10 @@
         </dependency>
     </dependencies>
     <distributionManagement>
-        <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-        </snapshotRepository>
         <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Nexus Release Repository</name>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>nexus</id>
+            <name>Nexus Repository</name>
+            <url>${internal.nexus.url}</url>
         </repository>
     </distributionManagement>
     <build>
